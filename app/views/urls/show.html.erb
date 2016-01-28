@@ -7,7 +7,7 @@
 
 <p>
   <strong>Shorten to:</strong>
-  <%= @url.link.identifier %> 
+  <%= short_link_url(@url.link.identifier).to_s %> 
   <%= link_to( 'Tiny Url', short_link_url(@url.link.identifier)) %>
 </p
 
