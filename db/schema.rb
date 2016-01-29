@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20160127161948) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "links", ["identifier"], name: "index_links_on_identifier", using: :btree
+  add_index "links", ["identifier"], name: "index_links_on_identifier", unique: true, using: :btree
 
   create_table "urls", force: :cascade do |t|
     t.string   "original"
