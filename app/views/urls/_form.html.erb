@@ -11,15 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :original %><br>
-    <%= f.text_field :original %>
+    <%= f.url_field :original, autofocus: true, class: "form-control" %>
   </div>
-  <div class="field">
+
+  <div class="form-group">
     <%= f.label :custom, 'Custom Url' %><br>
-    <%= f.text_field :custom %>
+    <%= f.text_field :custom, class: "form-control" %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <%= f.submit class: "btn btn-primary btn-lg" %>
 <% end %>
