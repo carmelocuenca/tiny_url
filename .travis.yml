@@ -1,0 +1,26 @@
+language: ruby
+rvm:
+- 2.0.0
+bundler_args: "--without production"
+addons:
+  postgresql: '9.3'
+services:
+- postgresql
+before_script:
+- cp config/database.yml.travis config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+script:
+- bundle exec rspec
+- bundle exec teaspoon
+notifications:
+  email:
+    on_success: always
+    on_failure: always
+deploy:
+  provider: heroku
+  app: sheltered-beach-42738
+  on:
+    repo: carmelocuenca/tiny_url
+  api_key:
+    secure: LrIh4NB5RFiFVtHtSpUiQNRyXdyY0ndAoJJCGjdgqi6uLXzRWimbq3VH1z5PQpkhYfTAJZ1wgQV1rPpaiKY4WuUEK0LbMm9ayYQQWl4Lq67/oMK8rbocwieUwzKk7v3xoMTXB9LQsoWtU/jfqaUlqDYxfcKZ6LCwb6ethuX/lIGiavgKCJY8buf+NGhoHfRRHDnADdhwhUkuoDKP4IryeobxaOZeNtl8dup2rKWP0PEzOFgbNcLWRagEoqPRcs9M9ZqtXkdRCHYCgOKLKRNaoJtVVqtBp3JACkD2Ewdn5yusr6uJSlnWLxxs/BrpkIKV0LtplCN9VxmrXmqB2Ww8HAUu6DplfepEyjjWQL5soSocwrdlH2+tjEHwSF9f0klJeRxgfA9y4HFIVp/jx+t7XYseenWDSMlDkP5VTzYO25bQ/dMZhFmg5qIaV3Ry3FhGLsbKNBC22m18a9dtd25fnjCEKXw6zedgtwx9QoUiTVBgU6KgmZbvVc7JQi7Q2PUTS4tQ3b8/AwrxIBfNzNYGm1QNsZpBRIxJf7+A9E/EU9TOfmK6MAaj+w5lc7L+fWYfu+JvMvaSRQdO+33Pqy7tLriktZX6GL6Nv23rmaDQ8yuOHtLa+BCtOyUvS7wyV7jBUKRUrkmVpVr/o/42e1EDd/HE29S7L673lmoRJBVwHs4=
