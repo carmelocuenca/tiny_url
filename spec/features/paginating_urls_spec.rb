@@ -20,7 +20,6 @@ feature 'Paginating Urls' do
   
   it 'display pagination' do
     
-    puts page.html
     expect(all('.pagination li a', text: /\d/).count ).to eql 3
     
     within '.pagination .next' do
