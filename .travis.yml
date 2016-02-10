@@ -12,7 +12,6 @@ before_script:
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 script:
 - bundle exec rspec
-- bundle exec teaspoon
 notifications:
   email:
     on_success: always
